@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jeune Prof : apprendre le français avec des leçons et des activités interactives pour les niveaux A1 et A2.">
+  <title>Jeune Prof – Apprendre le français</title>
+
+  <style>
+    :root {
+      --yellow: #FFCF56;
+      --coral: #FF8066;
+      --turquoise: #5CBCC5;
+      --cream: #F8F4E9;
+      --navy: #253A53;
+      --white: #FFFFFF;
+      --muted: #687789;
+      --green: #36856F;
+      --red: #C65345;
+      --shadow: 0 8px 25px rgba(37, 58, 83, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    button, select, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid #eee8da;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--coral);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    nav a {
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      color: var(--coral);
+    }
+
+    .hero {
+      padding: 65px 0;
+      background: var(--yellow);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      align-items: center;
+      gap: 35px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.65);
+      padding: 6px 13px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      line-height: 1.12;
+      margin: 16px 0;
+    }
+
+    .hero p {
+      max-width: 570px;
+      font-size: 1.1rem;
+    }
+
+    .hero-illustration {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      font-size: 5rem;
+    }
+
+    .hero-illustration p {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 8px 0 0;
+    }
+
+    .primary-button, .secondary-button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-weight: 700;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .primary-button {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .secondary-button {
+      background: var(--turquoise);
+      color: var(--navy);
+    }
+
+    .primary-button:hover, .secondary-button:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    section {
+      padding: 55px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .section-heading h2 {
+      font-size: 2rem;
+      margin: 0 0 8px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .level-panel {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .level-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .level-button {
+      border: 2px solid var(--turquoise);
+      background: var(--white);
+      color: var(--navy);
+      border-radius: 10px;
+      padding: 9px 22px;
+      font-weight: 700;
+    }
+
+    .level-button.active {
+      background: var(--turquoise);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 17px;
+    }
+
+    .category-card {
+      border: 0;
+      text-align: left;
+      background: var(--white);
+      padding: 22px 18px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      color: var(--navy);
+      transition: transform 0.2s, outline 0.2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .category-card.selected {
+      outline: 3px solid var(--coral);
+    }
+
+    .category-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .category-card h3 {
+      margin: 5px 0;
+    }
+
+    .category-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .learning-area {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-top: 25px;
+      display: none;
+    }
+
+    .learning-area.visible {
+      display: block;
+    }
+
+    .learning-area h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+
+    .lesson-example {
+      background: var(--cream);
+      border-left: 5px solid var(--turquoise);
+      padding: 15px 18px;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+
+    .lesson-example p {
+      margin: 5px 0;
+    }
+
+    .quiz-section {
+      background: var(--navy);
+      color: var(--white);
+    }
+
+    .quiz-card {
+      max-width: 720px;
+      margin: auto;
+      background: var(--white);
+      color: var(--navy);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 9px;
+      background: #e9edf0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 14px 0 22px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--turquoise);
+      transition: width 0.3s;
+    }
+
+    .quiz-question {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-button {
+      background: var(--cream);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      color: var(--navy);
+      text-align: left;
+      padding: 12px 15px;
+    }
+
+    .answer-button:hover:not(:disabled) {
+      border-color: var(--turquoise);
+    }
+
+    .answer-button:disabled {
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .feedback {
+      min-height: 55px;
+      margin: 17px 0;
+      font-weight: 700;
+    }
+
+    .feedback.success {
+      color: var(--green);
+    }
+
+    .feedback.try-again {
+      color: #9A6810;
+    }
+
+    .feedback.error {
+      color: var(--red);
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .assistant-section {
+      background: var(--cream);
+    }
+
+    .assistant-box {
+      max-width: 760px;
+      margin: auto;
+      padding: 28px;
+      background: var(--white);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .assistant-message {
+      background: #EAF7F7;
+      padding: 16px;
+      border-radius: 14px;
+      margin: 15px 0;
+    }
+
+    .assistant-input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .assistant-input-row input {
+      min-width: 0;
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccd5dc;
+      border-radius: 10px;
+    }
+
+    .notice {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 14px;
+    }
+
+    footer {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    footer p {
+      margin: 5px;
+    }
+
+    @media (max-width: 800px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-illustration {
+        max-width: 300px;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learning-area, .quiz-card, .assistant-box {
+        padding: 20px;
+      }
+
+      .assistant-input-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#">Jeune <span>Prof</span></a>
+      <nav aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#cours">Les cours</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#assistant">Assistant</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="accueil">
+      <div class="container hero-content">
+        <div>
+          <span class="eyebrow">Apprendre le français autrement</span>
+          <h1>Bienvenue sur Jeune Prof !</h1>
+          <p>
+            Lis, découvre, écoute et entraîne-toi en français.
+            Apprends à ton rythme grâce à des leçons et des activités interactives.
+          </p>
+          <a href="#cours">
+            <button class="primary-button" type="button">Commencer à apprendre</button>
+          </a>
+        </div>
+
+        <div class="hero-illustration" aria-label="Illustration de livres et de crayons">
+          📚✏️
+          <p>Le français, c'est facile !</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cours">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Choisis ton niveau</h2>
+          <p>Des activités adaptées à ton apprentissage.</p>
+        </div>
+
+        <div class="level-panel">
+          <div>
+            <strong>Mon niveau :</strong>
+            <span id="level-description">Débutant – A1</span>
+          </div>
+          <div class="level-buttons">
+            <button class="level-button active" id="a1-button"
+              type="button" onclick="changeLevel('A1')">A1</button>
+            <button class="level-button" id="a2-button"
+              type="button" onclick="changeLevel('A2')">A2</button>
+          </div>
+        </div>
+
+        <div class="category-grid">
+          <button class="category-card" type="button" data-category="lecture"
+            onclick="openLesson('lecture', this)">
+            <span class="category-icon">📖</span>
+            <h3>Lecture</h3>
+            <p>Lis des textes courts et comprends leur sens.</p>
+          </button>
+
+          <button class="category-card" type="button" data-category="grammaire"
+            onclick="openLesson('grammaire', this)">
+            <span class="category-icon">📝</span>
+            <h3>Grammaire</h3>
+            <p>Découvre les règles et construis des phrases.</p>
+          </button>
+
+          <button class="category-card" type="button" data-category="vocabulaire"
+            onclick="openLesson('vocabulaire', this)">
+            <span class="category-icon">💬</span>
+            <h3>Vocabulaire</h3>
+            <p>Apprends de nouveaux mots en contexte.</p>
+          </button>
+
+          <button class="category-card" type="button" data-category="prononciation"
+            onclick="openLesson('prononciation', this)">
+            <span class="category-icon">🔊</span>
+            <h3>Prononciation</h3>
+            <p>Entraîne-toi à prononcer les mots français.</p>
+          </button>
+        </div>
+
+        <div class="learning-area" id="lesson-area" aria-live="polite">
+          <h3 id="lesson-title">Leçon</h3>
+          <div id="lesson-content"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Je m'entraîne !</h2>
+          <p>Réponds aux questions et teste tes connaissances.</p>
+        </div>
+
+        <div class="quiz-card">
+          <div class="quiz-top">
+            <span id="quiz-level">Quiz A1</span>
+            <span id="question-number">Question 1 / 4</span>
+          </div>
+
+          <div class="progress-track" aria-label="Progression du quiz">
+            <div class="progress-bar" id="progress-bar"></div>
+          </div>
+
+          <div class="quiz-question" id="quiz-question">
+            Comment dit-on « hello » en français ?
+          </div>
+
+          <div class="answer-list" id="answer-list"></div>
+
+          <div class="feedback" id="feedback" aria-live="polite"></div>
+
+          <div class="quiz-actions">
+            <button class="primary-button" id="next-button"
+              type="button" onclick="nextQuestion()" hidden>
+              Question suivante
+            </button>
+            <button class="secondary-button" id="restart-button"
+              type="button" onclick="restartQuiz()" hidden>
+              Recommencer
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="assistant-section" id="assistant">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Mon assistant de français 🤖</h2>
+          <p>Pose une question et découvre une explication simple.</p>
+        </div>
+
+        <div class="assistant-box">
+          <strong>Assistant Jeune Prof</strong>
+          <div class="assistant-message" id="assistant-message" aria-live="polite">
+            Bonjour ! Je suis ton assistant pédagogique.
+            Tu peux me demander une explication sur « être », « avoir »
+            ou les articles définis.
+          </div>
+
+          <form class="assistant-input-row" id="assistant-form">
+            <input id="assistant-input" type="text"
+              placeholder="Écris ta question ici..."
+              aria-label="Ta question" required>
+            <button class="primary-button" type="submit">Envoyer</button>
+          </form>
+
+          <p class="notice">
+            Version de démonstration : les réponses sont prédéfinies.
+            L'assistant n'est pas encore connecté à une intelligence artificielle.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Jeune Prof</strong> – Apprendre le français avec plaisir !</p>
+    <p>Un espace pédagogique pour les apprenants de FLE.</p>
+  </footer>
+
+  <script>
+    let currentLevel = "A1";
+    let currentCategory = "lecture";
+    let questionIndex = 0;
+    let attempts = 0;
+    let score = 0;
+    let quizFinished = false;
+
+    const lessons = {
+      A1: {
+        lecture: {
+          title: "Lecture – Je me présente",
+          content: `
+            <p>Bonjour ! Je m'appelle Lina. J'ai 18 ans.
+            Je suis cambodgienne et j'habite à Battambang.
+            Je suis étudiante. J'aime lire et écouter de la musique.</p>
+            <div class="lesson-example">
+              <strong>Je comprends le texte :</strong>
+              <p>1. Comment s'appelle la jeune fille ?</p>
+              <p>2. Quel âge a-t-elle ?</p>
+              <p>3. Où habite-t-elle ?</p>
+            </div>
+          `
+        },
+        grammaire: {
+          title: "Grammaire – Le verbe être",
+          content: `
+            <p>Le verbe <strong>être</strong> sert à présenter une personne,
+            une nationalité ou une profession.</p>
+            <div class="lesson-example">
+              <p>Je suis étudiant.</p>
+              <p>Tu es cambodgien.</p>
+              <p>Il / Elle est professeur.</p>
+              <p>Nous sommes amis.</p>
+              <p>Vous êtes étudiants.</p>
+              <p>Ils / Elles sont contents.</p>
+            </div>
+          `
+        },
+        vocabulaire: {
+          title: "Vocabulaire – Les salutations",
+          content: `
+            <p>Voici quelques expressions pour saluer une personne :</p>
+            <div class="lesson-example">
+              <p><strong>Bonjour</strong> : pour saluer pendant la journée.</p>
+              <p><strong>Bonsoir</strong> : pour saluer le soir.</p>
+              <p><strong>Salut</strong> : pour saluer un ami.</p>
+              <p><strong>Au revoir</strong> : pour prendre congé.</p>
+              <p><strong>À bientôt</strong> : pour dire que l'on va se revoir.</p>
+            </div>
+          `
+        },
+        prononciation: {
+          title: "Prononciation – Le son [ʃ] : CH",
+          content: `
+            <p>En français, les lettres <strong>CH</strong> se prononcent
+            souvent comme le son [ʃ].</p>
+            <div class="lesson-example">
+              <p><strong>chat – cheval – chocolat – chaise – dimanche</strong></p>
+              <p>Lis les mots lentement, puis répète-les à voix haute.</p>
+            </div>
+            <p>Conseil : arrondis légèrement les lèvres et laisse passer l'air.</p>
+          `
+        }
+      },
+
+      A2: {
+        lecture: {
+          title: "Lecture – Une journée au marché",
+          content: `
+            <p>Samedi matin, Dara va au marché avec sa sœur.
+            Ils achètent des légumes, du poisson et des fruits.
+            Ensuite, ils prennent un petit-déjeuner dans un restaurant.
+            Ils rentrent à la maison vers onze heures.</p>
+            <div class="lesson-example">
+              <strong>Je comprends le texte :</strong>
+              <p>1. Quand Dara va-t-il au marché ?</p>
+              <p>2. Avec qui va-t-il au marché ?</p>
+              <p>3. Que font-ils après les achats ?</p>
+            </div>
+          `
+        },
+        grammaire: {
+          title: "Grammaire – Le passé composé",
+          content: `
+            <p>Le passé composé permet de parler d'une action terminée
+            dans le passé. Il se forme généralement avec
+            <strong>avoir ou être + participe passé</strong>.</p>
+            <div class="lesson-example">
+              <p>J'ai mangé du riz.</p>
+              <p>Tu as regardé un film.</p>
+              <p>Elle est allée au marché.</p>
+              <p>Nous avons étudié le français.</p>
+            </div>
+          `
+        },
+        vocabulaire: {
+          title: "Vocabulaire – Les activités quotidiennes",
+          content: `
+            <p>Voici quelques verbes utiles pour parler de sa journée :</p>
+            <div class="lesson-example">
+              <p><strong>Se réveiller</strong> : Je me réveille à 6 heures.</p>
+              <p><strong>Se lever</strong> : Je me lève tôt.</p>
+              <p><strong>Prendre le petit-déjeuner</strong> : Je prends mon petit-déjeuner.</p>
+              <p><strong>Étudier</strong> : J'étudie le français.</p>
+              <p><strong>Se coucher</strong> : Je me couche à 22 heures.</p>
+            </div>
+          `
+        },
+        prononciation: {
+          title: "Prononciation – Les sons [s] et [z]",
+          content: `
+            <p>En français, la lettre S peut se prononcer [s] ou [z]
+            selon sa place dans le mot.</p>
+            <div class="lesson-example">
+              <p><strong>Son [s] :</strong> soleil, poisson, classe.</p>
+              <p><strong>Son [z] :</strong> maison, musique, rose.</p>
+            </div>
+            <p>Lis les mots à voix haute et écoute la différence entre les deux sons.</p>
+          `
+        }
+      }
+    };
+
+    const quizzes = {
+      A1: [
+        {
+          question: "Comment dit-on « hello » en français ?",
+          answers: ["Au revoir", "Bonjour", "Merci"],
+          correct: 1,
+          hint: "C'est une expression que l'on utilise pour saluer une personne.",
+          explanation: "On dit « Bonjour » pour saluer pendant la journée."
+        },
+        {
+          question: "Complète : Je ... étudiant.",
+          answers: ["suis", "es", "est"],
+          correct: 0,
+          hint: "Avec le pronom « je », quelle forme du verbe être utilise-t-on ?",
+          explanation: "On dit « Je suis étudiant »."
+        },
+        {
+          question: "Quel mot désigne un animal ?",
+          answers: ["Une chaise", "Un chat", "Une table"],
+          correct: 1,
+          hint: "Cet animal aime souvent dormir et miauler.",
+          explanation: "Un chat est un animal."
+        },
+        {
+          question: "Complète : Elle ... 18 ans.",
+          answers: ["est", "a", "suis"],
+          correct: 1,
+          hint: "Pour exprimer l'âge, on utilise le verbe avoir.",
+          explanation: "On dit « Elle a 18 ans »."
+        }
+      ],
+      A2: [
+        {
+          question: "Complète : Hier, nous ... un film.",
+          answers: ["regardons", "avons regardé", "regarder"],
+          correct: 1,
+          hint: "Le mot « hier » indique une action passée et terminée.",
+          explanation: "On utilise le passé composé : « nous avons regardé »."
+        },
+        {
+          question: "Quel mot exprime une fréquence ?",
+          answers: ["Souvent", "Demain", "Hier"],
+          correct: 0,
+          hint: "Ce mot indique qu'une action se répète régulièrement.",
+          explanation: "« Souvent » indique la fréquence."
+        },
+        {
+          question: "Complète : Elle est ... au marché.",
+          answers: ["allé", "allée", "aller"],
+          correct: 1,
+          hint: "Avec être, le participe passé s'accorde ici avec « elle ».",
+          explanation: "On écrit « Elle est allée » avec un -e."
+        },
+        {
+          question: "Quel connecteur exprime la conséquence ?",
+          answers: ["Parce que", "Donc", "Mais"],
+          correct: 1,
+          hint: "On utilise ce mot pour présenter le résultat d'une situation.",
+          explanation: "« Donc » exprime la conséquence."
+        }
+      ]
+    };
+
+    function changeLevel(level) {
+      currentLevel = level;
+
+      document.getElementById("a1-button").classList.toggle("active", level === "A1");
+      document.getElementById("a2-button").classList.toggle("active", level === "A2");
+
+      document.getElementById("level-description").textContent =
+        level === "A1" ? "Débutant – A1" : "Élémentaire – A2";
+
+      document.querySelectorAll(".category-card").forEach(card => {
+        card.classList.remove("selected");
+      });
+
+      document.getElementById("lesson-area").classList.remove("visible");
+
+      restartQuiz();
+    }
+
+    function openLesson(category, button) {
+      currentCategory = category;
+
+      document.querySelectorAll(".category-card").forEach(card => {
+        card.classList.remove("selected");
+      });
+
+      button.classList.add("selected");
+
+      const lesson = lessons[currentLevel][category];
+
+      document.getElementById("lesson-title").textContent = lesson.title;
+      document.getElementById("lesson-content").innerHTML = lesson.content;
+      document.getElementById("lesson-area").classList.add("visible");
+
+      document.getElementById("lesson-area").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+
+    function displayQuestion() {
+      const questions = quizzes[currentLevel];
+      const question = questions[questionIndex];
+
+      attempts = 0;
+      quizFinished = false;
+
+      document.getElementById("quiz-level").textContent = "Quiz " + currentLevel;
+      document.getElementById("question-number").textContent =
+        "Question " + (questionIndex + 1) + " / " + questions.length;
+
+      document.getElementById("progress-bar").style.width =
+        (questionIndex / questions.length * 100) + "%";
+
+      document.getElementById("quiz-question").textContent = question.question;
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("feedback").className = "feedback";
+
+      document.getElementById("next-button").hidden = true;
+      document.getElementById("restart-button").hidden = true;
+
+      const answerList = document.getElementById("answer-list");
+      answerList.innerHTML = "";
+
+      question.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer-button";
+        button.textContent = answer;
+        button.addEventListener("click", () => checkAnswer(index));
+        answerList.appendChild(button);
+      });
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (quizFinished) return;
+
+      const question = quizzes[currentLevel][questionIndex];
+      const feedback = document.getElementById("feedback");
+      const answerButtons = document.querySelectorAll(".answer-button");
+
+      attempts++;
+
+      if (selectedIndex === question.correct) {
+        quizFinished = true;
+        score++;
+
+        feedback.textContent = "🎉 Bravo ! " + question.explanation;
+        feedback.className = "feedback success";
+
+        answerButtons.forEach(button => button.disabled = true);
+        showNextAction();
+        return;
+      }
+
+      if (attempts === 1) {
+        feedback.textContent = "💡 Pas tout à fait. Voici un indice : " + question.hint;
+        feedback.className = "feedback try-again";
+
+        answerButtons[selectedIndex].disabled = true;
+        return;
+      }
+
+      quizFinished = true;
+
+      feedback.textContent =
+        "La bonne réponse était « " + question.answers[question.correct] +
+        " ». " + question.explanation;
+
+      feedback.className = "feedback error";
+
+      answerButtons.forEach(button => button.disabled = true);
+      showNextAction();
+    }
+
+    function showNextAction() {
+      const isLastQuestion =
+        questionIndex === quizzes[currentLevel].length - 1;
+
+      document.getElementById("progress-bar").style.width =
+        ((questionIndex + 1) / quizzes[currentLevel].length * 100) + "%";
+
+      if (isLastQuestion) {
+        document.getElementById("next-button").hidden = true;
+        document.getElementById("restart-button").hidden = false;
+      } else {
+        document.getElementById("next-button").hidden = false;
+      }
+    }
+
+    function nextQuestion() {
+      if (questionIndex < quizzes[currentLevel].length - 1) {
+        questionIndex++;
+        displayQuestion();
+      }
+    }
+
+    function restartQuiz() {
+      questionIndex = 0;
+      score = 0;
+      attempts = 0;
+      quizFinished = false;
+      displayQuestion();
+    }
+
+    const assistantForm = document.getElementById("assistant-form");
+
+    assistantForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const input = document.getElementById("assistant-input");
+      const message = input.value.trim();
+
+      if (!message) return;
+
+      const normalizedMessage = message.toLowerCase();
+      let response =
+        "Bonne question ! Pour le moment, je peux répondre à des questions sur le verbe être, le verbe avoir et les articles définis. Essaie de poser une question sur l'un de ces sujets.";
+
+      if (normalizedMessage.includes("être")) {
+        response =
+          "Le verbe être au présent : je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont. Exemple : Je suis étudiant.";
+      } else if (normalizedMessage.includes("avoir")) {
+        response =
+          "Le verbe avoir au présent : j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont. Exemple : J'ai 20 ans.";
+      } else if (
+        normalizedMessage.includes("article") ||
+        normalizedMessage.includes("défini")
+      ) {
+        response =
+          "Les articles définis sont : le, la, l' et les. Exemple : le livre, la table, l'école, les élèves. On les utilise notamment pour parler de quelque chose de connu ou de précis.";
+      }
+
+      document.getElementById("assistant-message").textContent = response;
+      input.value = "";
+    });
+
+    displayQuestion();
+  </script>
+</body>
+</html>
