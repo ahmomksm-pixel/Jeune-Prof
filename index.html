@@ -138,10 +138,12 @@
     }
 
     .primary-button, .secondary-button {
+      display: inline-block;
       border: 0;
       border-radius: 12px;
       padding: 12px 20px;
       font-weight: 700;
+      text-decoration: none;
       transition: transform 0.2s, opacity 0.2s;
     }
 
@@ -252,7 +254,7 @@
     }
 
     .learning-area {
-      background: #fff;
+      background: var(--white);
       border-radius: 20px;
       padding: 28px;
       box-shadow: var(--shadow);
@@ -279,6 +281,110 @@
 
     .lesson-example p {
       margin: 5px 0;
+    }
+
+    /* Nouvelle présentation de la lecture */
+
+    .reading-intro {
+      color: var(--muted);
+      margin-top: -5px;
+    }
+
+    .reading-text {
+      background: #FFF9E9;
+      border: 1px solid #F2E5C5;
+      border-radius: 16px;
+      padding: 22px;
+      margin: 20px 0;
+      font-size: 1.05rem;
+    }
+
+    .reading-text p {
+      margin: 0 0 15px;
+    }
+
+    .reading-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .reading-text .highlight-word {
+      color: #B65B42;
+      font-weight: 700;
+      background: #FFE4D9;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
+    .reading-subtitle {
+      font-size: 1.2rem;
+      margin: 28px 0 12px;
+    }
+
+    .vocabulary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .vocabulary-item {
+      background: #EAF7F7;
+      border-radius: 12px;
+      padding: 13px 15px;
+    }
+
+    .vocabulary-item strong {
+      display: block;
+      color: var(--navy);
+    }
+
+    .vocabulary-item span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .reading-quiz {
+      background: var(--cream);
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 15px;
+    }
+
+    .reading-question {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 13px;
+    }
+
+    .reading-question p {
+      margin: 0 0 10px;
+      font-weight: 700;
+    }
+
+    .reading-option {
+      display: block;
+      margin: 7px 0;
+      cursor: pointer;
+      font-weight: 400;
+    }
+
+    .reading-option input {
+      margin-right: 8px;
+      accent-color: var(--turquoise);
+    }
+
+    .reading-feedback {
+      margin-top: 15px;
+      font-weight: 700;
+      min-height: 25px;
+    }
+
+    .reading-feedback.success {
+      color: var(--green);
+    }
+
+    .reading-feedback.error {
+      color: var(--red);
     }
 
     .quiz-section {
@@ -424,6 +530,10 @@
       margin: 5px;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     @media (max-width: 800px) {
       .hero-content {
         grid-template-columns: 1fr;
@@ -449,7 +559,8 @@
         gap: 12px;
       }
 
-      .category-grid {
+      .category-grid,
+      .vocabulary-grid {
         grid-template-columns: 1fr;
       }
 
@@ -488,9 +599,7 @@
             Lis, découvre, écoute et entraîne-toi en français.
             Apprends à ton rythme grâce à des leçons et des activités interactives.
           </p>
-          <a href="#cours">
-            <button class="primary-button" type="button">Commencer à apprendre</button>
-          </a>
+          <a class="primary-button" href="#cours">Commencer à apprendre</a>
         </div>
 
         <div class="hero-illustration" aria-label="Illustration de livres et de crayons">
@@ -643,19 +752,165 @@
     const lessons = {
       A1: {
         lecture: {
-          title: "Lecture – Je me présente",
+          title: "Lecture – Mon quartier à Phnom Penh",
           content: `
-            <p>Bonjour ! Je m'appelle Lina. J'ai 18 ans.
-            Je suis cambodgienne et j'habite à Battambang.
-            Je suis étudiante. J'aime lire et écouter de la musique.</p>
-            <div class="lesson-example">
-              <strong>Je comprends le texte :</strong>
-              <p>1. Comment s'appelle la jeune fille ?</p>
-              <p>2. Quel âge a-t-elle ?</p>
-              <p>3. Où habite-t-elle ?</p>
+            <p class="reading-intro">
+              <strong>Niveau A1 · Thème : Le quartier</strong><br>
+              Lis attentivement le texte, puis réponds aux questions.
+            </p>
+
+            <div class="reading-text">
+              <p>
+                J'habite dans un <span class="highlight-word">quartier</span>
+                calme à Phnom Penh. C'est un beau quartier.
+                Il y a une école, un marché, une pharmacie et des magasins.
+              </p>
+
+              <p>
+                Près de chez moi, il y a un petit parc.
+                Les enfants jouent dans le parc après l'école.
+                À côté du parc, il y a une boulangerie.
+                J'aime acheter du pain dans cette boulangerie.
+              </p>
+
+              <p>
+                Dans mon quartier, il y a aussi un restaurant et une banque.
+                Les habitants sont gentils et les rues sont propres.
+              </p>
+
+              <p>
+                J'aime beaucoup mon quartier parce qu'il est agréable et pratique.
+              </p>
+            </div>
+
+            <h4 class="reading-subtitle">📚 Mots à retenir</h4>
+
+            <div class="vocabulary-grid">
+              <div class="vocabulary-item">
+                <strong>Un quartier</strong>
+                <span>Une partie d'une ville.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Un marché</strong>
+                <span>Un endroit où l'on achète des produits.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Une pharmacie</strong>
+                <span>Un magasin où l'on achète des médicaments.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Une boulangerie</strong>
+                <span>Un magasin où l'on achète du pain.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Les habitants</strong>
+                <span>Les personnes qui vivent dans un endroit.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Agréable</strong>
+                <span>Qui est plaisant, où l'on se sent bien.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Pratique</strong>
+                <span>Qui est utile et facile au quotidien.</span>
+              </div>
+
+              <div class="vocabulary-item">
+                <strong>Calme</strong>
+                <span>Où il n'y a pas beaucoup de bruit.</span>
+              </div>
+            </div>
+
+            <h4 class="reading-subtitle">✏️ Je comprends le texte</h4>
+            <p>Choisis la bonne réponse pour chaque question.</p>
+
+            <div class="reading-quiz">
+              <div class="reading-question">
+                <p>1. Où habite la personne ?</p>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q1" value="a">
+                  À Siem Reap
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q1" value="b">
+                  À Phnom Penh
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q1" value="c">
+                  À Battambang
+                </label>
+              </div>
+
+              <div class="reading-question">
+                <p>2. Qu'est-ce qu'il y a près de chez la personne ?</p>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q2" value="a">
+                  Un petit parc
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q2" value="b">
+                  Un cinéma
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q2" value="c">
+                  Une piscine
+                </label>
+              </div>
+
+              <div class="reading-question">
+                <p>3. Que font les enfants après l'école ?</p>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q3" value="a">
+                  Ils vont au marché.
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q3" value="b">
+                  Ils achètent du pain.
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q3" value="c">
+                  Ils jouent dans le parc.
+                </label>
+              </div>
+
+              <div class="reading-question">
+                <p>4. Pourquoi la personne aime-t-elle son quartier ?</p>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q4" value="a">
+                  Parce qu'il est grand et animé.
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q4" value="b">
+                  Parce qu'il est agréable et pratique.
+                </label>
+                <label class="reading-option">
+                  <input type="radio" name="reading-q4" value="c">
+                  Parce qu'il est près de la mer.
+                </label>
+              </div>
+
+              <button class="primary-button" type="button"
+                onclick="checkReadingAnswers()">
+                Vérifier mes réponses
+              </button>
+
+              <button class="secondary-button" type="button"
+                onclick="resetReadingAnswers()">
+                Recommencer
+              </button>
+
+              <div id="reading-feedback" class="reading-feedback"
+                aria-live="polite"></div>
             </div>
           `
         },
+
         grammaire: {
           title: "Grammaire – Le verbe être",
           content: `
@@ -671,6 +926,7 @@
             </div>
           `
         },
+
         vocabulaire: {
           title: "Vocabulaire – Les salutations",
           content: `
@@ -684,6 +940,7 @@
             </div>
           `
         },
+
         prononciation: {
           title: "Prononciation – Le son [ʃ] : CH",
           content: `
@@ -706,6 +963,7 @@
             Ils achètent des légumes, du poisson et des fruits.
             Ensuite, ils prennent un petit-déjeuner dans un restaurant.
             Ils rentrent à la maison vers onze heures.</p>
+
             <div class="lesson-example">
               <strong>Je comprends le texte :</strong>
               <p>1. Quand Dara va-t-il au marché ?</p>
@@ -714,6 +972,7 @@
             </div>
           `
         },
+
         grammaire: {
           title: "Grammaire – Le passé composé",
           content: `
@@ -728,6 +987,7 @@
             </div>
           `
         },
+
         vocabulaire: {
           title: "Vocabulaire – Les activités quotidiennes",
           content: `
@@ -741,6 +1001,7 @@
             </div>
           `
         },
+
         prononciation: {
           title: "Prononciation – Les sons [s] et [z]",
           content: `
@@ -787,6 +1048,7 @@
           explanation: "On dit « Elle a 18 ans »."
         }
       ],
+
       A2: [
         {
           question: "Complète : Hier, nous ... un film.",
@@ -857,6 +1119,65 @@
         block: "nearest"
       });
     }
+
+    // Vérification des réponses à la nouvelle activité de lecture A1
+
+    function checkReadingAnswers() {
+      const correctAnswers = {
+        "reading-q1": "b",
+        "reading-q2": "a",
+        "reading-q3": "c",
+        "reading-q4": "b"
+      };
+
+      let scoreReading = 0;
+      let unanswered = false;
+
+      for (const questionName in correctAnswers) {
+        const selected = document.querySelector(
+          'input[name="' + questionName + '"]:checked'
+        );
+
+        if (!selected) {
+          unanswered = true;
+        } else if (selected.value === correctAnswers[questionName]) {
+          scoreReading++;
+        }
+      }
+
+      const feedback = document.getElementById("reading-feedback");
+
+      if (unanswered) {
+        feedback.textContent =
+          "Il manque une ou plusieurs réponses. Réponds à toutes les questions.";
+        feedback.className = "reading-feedback error";
+        return;
+      }
+
+      if (scoreReading === 4) {
+        feedback.textContent =
+          "🎉 Excellent ! Tu as 4 bonnes réponses sur 4. Bravo !";
+        feedback.className = "reading-feedback success";
+      } else {
+        feedback.textContent =
+          "Tu as " + scoreReading + " bonne(s) réponse(s) sur 4. Relis le texte et essaie encore !";
+        feedback.className = "reading-feedback error";
+      }
+    }
+
+    function resetReadingAnswers() {
+      document.querySelectorAll(
+        'input[name^="reading-q"]'
+      ).forEach(input => {
+        input.checked = false;
+      });
+
+      const feedback = document.getElementById("reading-feedback");
+      feedback.textContent = "";
+      feedback.className = "reading-feedback";
+    }
+
+    // Fonctionnement du quiz général
 
     function displayQuestion() {
       const questions = quizzes[currentLevel];
@@ -963,6 +1284,8 @@
       displayQuestion();
     }
 
+    // Assistant pédagogique de démonstration
+
     const assistantForm = document.getElementById("assistant-form");
 
     assistantForm.addEventListener("submit", function(event) {
@@ -995,6 +1318,7 @@
       input.value = "";
     });
 
+    // Afficher la première question au chargement de la page
     displayQuestion();
   </script>
 </body>
